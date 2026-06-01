@@ -3,13 +3,21 @@ import { AppModule } from './app.module';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
-  
-  // Enable CORS for frontend communication in development
-  app.enableCors();
-  
-  await app.listen(3001);
+
+  // Enable CORS — allow frontend in dev and production
+  app.enableCors({
+    origin: [
+      'http://localhost:3000',
+      'https://mbautolab-frontend.onrender.com',
+    ],
+    methods: ['GET', 'POST', 'PATCH', 'DELETE', 'OPTIONS'],
+    credentials: true,
+  });
+
+  const port = process.env.PORT || 3001;
+  await app.listen(port);
   console.log('====================================================');
-  console.log('🚀 MBAUTOLAB REST API is running on: http://localhost:3001');
+  console.log(`🚀 MBAUTOLAB REST API is running on port: ${port}`);
   console.log('====================================================');
 }
 bootstrap();
