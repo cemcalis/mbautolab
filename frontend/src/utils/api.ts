@@ -1,5 +1,8 @@
-// Dynamic hostname resolver — supports local network phone devices
+// Production uses NEXT_PUBLIC_API_URL env var, dev falls back to localhost
 const getApiBaseUrl = (): string => {
+  if (process.env.NEXT_PUBLIC_API_URL) {
+    return `${process.env.NEXT_PUBLIC_API_URL}/api`;
+  }
   if (typeof window !== 'undefined') {
     return `http://${window.location.hostname}:3001/api`;
   }
