@@ -1,0 +1,43 @@
+# Dependency directories
+node_modules/
+jspm_packages/
+web_modules/
+
+# Next.js build output
+.next/
+out/
+
+# NestJS build output
+dist/
+build/
+
+# Local databases
+*.sqlite
+*.sqlite-journal
+
+# IDE logs and settings
+.idea/
+.vscode/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# Log files
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+# Environment files
+.env
+.env.local
+.env.production
+.env.development
+.env.test
+
+# OS files
+.DS_Store
+Thumbs.db

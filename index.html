@@ -1,0 +1,515 @@
+<!DOCTYPE html>
+<html lang="tr" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>MBAUTOLAB | Akıllı Oto Servis Takip Sistemi</title>
+    <meta name="description" content="MBAUTOLAB Fatih & Mustafa Usta araç geçmişi ve servis takip sistemi. Aracınızın plakasını girerek tüm geçmişi görün.">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Custom Style Sheet -->
+    <link rel="stylesheet" href="index.css">
+    
+    <!-- QR Code Generator (QRious) -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrious/4.0.2/qrious.min.js"></script>
+    
+    <!-- HTML5 QR Code Scanner (Camera) -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html5-qrcode/2.3.8/html5-qrcode.min.js"></script>
+</head>
+<body>
+    
+    <!-- Glow Effects in Background -->
+    <div class="bg-glow bg-glow-1"></div>
+    <div class="bg-glow bg-glow-2"></div>
+
+    <!-- MAIN HEADER -->
+    <header class="app-header">
+        <div class="header-container">
+            <!-- SVG Logo reflecting the MBAUTOLAB badge -->
+            <div class="logo-wrapper" id="btn-go-home">
+                <svg class="logo-svg" viewBox="0 0 450 120" xmlns="http://www.w3.org/2000/svg">
+                    <!-- BMW M Stripes stylized into an 'M' -->
+                    <g transform="translate(10, 10)">
+                        <polygon points="0,70 20,10 40,10 20,70" fill="#00a2e8" />
+                        <polygon points="30,70 50,10 70,10 50,70" fill="#003a94" />
+                        <polygon points="60,70 80,10 100,10 80,70" fill="#e51b24" />
+                        <!-- Connection lines creating an elegant M shape silhouette -->
+                        <polygon points="90,70 110,10 125,10 105,70" fill="#003a94" opacity="0.3" />
+                    </g>
+                    <!-- Car Silhouette (Luxury / Sports Car Side Profile) -->
+                    <path d="M120,45 Q150,28 200,28 T330,30 Q370,32 390,45 L405,52 Q415,55 410,65 L370,65 Q360,53 330,53 Q300,53 290,65 L170,65 Q160,53 130,53 Q100,53 90,65 L85,65 Q75,55 85,52 Z" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" opacity="0.85" />
+                    <!-- Letters .B -->
+                    <text x="260" y="65" font-family="'Outfit', sans-serif" font-weight="900" font-size="52" fill="currentColor" letter-spacing="1">.B</text>
+                    <!-- Subtitle AUTOLAB -->
+                    <text x="140" y="100" font-family="'Space Grotesk', sans-serif" font-weight="700" font-size="28" fill="currentColor" letter-spacing="9">AUTOLAB</text>
+                    <!-- Horizontal Lines under Car -->
+                    <line x1="30" y1="100" x2="120" y2="100" stroke="currentColor" stroke-width="1.5" opacity="0.4" />
+                    <line x1="340" y1="100" x2="430" y2="100" stroke="currentColor" stroke-width="1.5" opacity="0.4" />
+                </svg>
+            </div>
+            
+            <!-- Theme and Login Controls -->
+            <div class="header-controls">
+                <button class="control-btn" id="theme-toggle" title="Temayı Değiştir" aria-label="Temayı Değiştir">
+                    <i class="fa-solid fa-moon theme-icon-dark"></i>
+                    <i class="fa-solid fa-sun theme-icon-light"></i>
+                </button>
+                <button class="btn btn-secondary btn-icon-only" id="nav-master-btn" title="Usta Girişi">
+                    <i class="fa-solid fa-user-gear"></i>
+                    <span class="btn-text">Usta Paneli</span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- MAIN WRAPPER -->
+    <main class="app-main container">
+
+        <!-- ============================================== -->
+        <!-- SECTION 1: CUSTOMER SEARCH (HOME) -->
+        <!-- ============================================== -->
+        <section id="sec-customer-search" class="app-section active">
+            <div class="hero-block">
+                <h1 class="hero-title">Araç Servis Takip Sistemi</h1>
+                <p class="hero-subtitle">Müşterilerimiz ve Ustalarımız için Şeffaf Oto Servis Çözümü. Aracınızın durumunu ve parça değişim geçmişini anında görün.</p>
+            </div>
+
+            <!-- License Plate Search Card -->
+            <div class="search-card card">
+                <h2 class="card-title text-center">Plaka ile Araç Geçmişi Sorgula</h2>
+                
+                <div class="search-form">
+                    <!-- Interactive License Plate input element -->
+                    <div class="license-plate-input-container">
+                        <div class="plate-tr-badge">TR</div>
+                        <input type="text" id="input-search-plate" class="plate-input-field" placeholder="34 MBA 99" autocomplete="off" max-length="12">
+                    </div>
+                    
+                    <div class="button-group-vertical">
+                        <button class="btn btn-primary btn-lg" id="btn-search-plate">
+                            <i class="fa-solid fa-magnifying-glass"></i> Sorgula
+                        </button>
+                        <button class="btn btn-accent btn-lg" id="btn-open-scanner">
+                            <i class="fa-solid fa-qrcode"></i> Kameradan QR Tara
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Fast Demo Links -->
+                <div class="demo-plates">
+                    <span class="demo-label">Örnek Plakalar (Test Etmek İçin):</span>
+                    <div class="demo-tags">
+                        <button class="tag-link">34 MBA 99</button>
+                        <button class="tag-link">34 AUT 45</button>
+                        <button class="tag-link">06 LAB 10</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Info Cards Block -->
+            <div class="features-grid">
+                <div class="feature-card card">
+                    <div class="feature-icon"><i class="fa-solid fa-circle-check"></i></div>
+                    <h3>Şeffaf Hizmet</h3>
+                    <p>Değişen her parçanın ustalarımız tarafından çekilen detaylı fotoğrafını müşterilerimize anında sunuyoruz.</p>
+                </div>
+                <div class="feature-card card">
+                    <div class="feature-icon"><i class="fa-solid fa-print"></i></div>
+                    <h3>Araca Özel QR Kod</h3>
+                    <p>Aracınıza yapıştırdığımız QR kodu telefonunuzla taratarak tüm bakım geçmişini anında sorgulayın.</p>
+                </div>
+                <div class="feature-card card">
+                    <div class="feature-icon"><i class="fa-solid fa-screwdriver-wrench"></i></div>
+                    <h3>2 Usta Güvencesi</h3>
+                    <p>Fatih Usta ve Mustafa Usta'nın uzman ellerinde yapılan işlemler doğrudan kayıt altına alınır.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============================================== -->
+        <!-- SECTION 2: CUSTOMER VEHICLE DETAIL -->
+        <!-- ============================================== -->
+        <section id="sec-customer-detail" class="app-section">
+            <div class="back-navigation">
+                <button class="btn btn-link" id="btn-detail-back">
+                    <i class="fa-solid fa-arrow-left"></i> Arama Ekranına Dön
+                </button>
+            </div>
+
+            <!-- Vehicle Summary Card -->
+            <div class="vehicle-info-card card">
+                <div class="vehicle-info-header">
+                    <div class="vehicle-title-block">
+                        <div class="license-plate-badge" id="detail-plate-badge">34 MBA 99</div>
+                        <h2 id="detail-brand-model">BMW M5 Sedan</h2>
+                    </div>
+                    <div class="vehicle-status-badge badge-pending" id="detail-status-badge">Bakımda</div>
+                </div>
+                
+                <div class="vehicle-meta-grid">
+                    <div class="meta-item">
+                        <span class="meta-label">Müşteri</span>
+                        <strong id="detail-owner">Cem Bey</strong>
+                    </div>
+                    <div class="meta-item">
+                        <span class="meta-label">Son Güncelleme</span>
+                        <strong id="detail-last-updated">31.05.2026 14:15</strong>
+                    </div>
+                    <div class="meta-item">
+                        <span class="meta-label">Kayıtlı Telefon</span>
+                        <strong id="detail-owner-phone">0555 *** ** 99</strong>
+                    </div>
+                </div>
+
+                <!-- Visual Service Progress Tracker -->
+                <div class="status-tracker-container">
+                    <div class="status-tracker-title">Servis Aşama Durumu</div>
+                    <div class="progress-steps">
+                        <div class="step" data-step="sirada">
+                            <div class="step-dot"><i class="fa-solid fa-hourglass-start"></i></div>
+                            <span class="step-text">Sırada</span>
+                        </div>
+                        <div class="step" data-step="bakimda">
+                            <div class="step-dot"><i class="fa-solid fa-screwdriver-wrench"></i></div>
+                            <span class="step-text">Bakımda</span>
+                        </div>
+                        <div class="step" data-step="test">
+                            <div class="step-dot"><i class="fa-solid fa-gauge-high"></i></div>
+                            <span class="step-text">Testte</span>
+                        </div>
+                        <div class="step" data-step="hazir">
+                            <div class="step-dot"><i class="fa-solid fa-circle-check"></i></div>
+                            <span class="step-text">Hazır</span>
+                        </div>
+                        <div class="step" data-step="teslim">
+                            <div class="step-dot"><i class="fa-solid fa-handshake"></i></div>
+                            <span class="step-text">Teslim Edildi</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Service History Timeline -->
+            <div class="timeline-container">
+                <h3 class="section-title"><i class="fa-solid fa-clock-rotate-left"></i> Servis Geçmişi Zaman Tüneli</h3>
+                
+                <!-- If no records, dynamic container -->
+                <div id="timeline-list">
+                    <!-- Timeline items will be injected here by JS -->
+                </div>
+            </div>
+
+            <!-- QR Code Card for Customer's vehicle -->
+            <div class="qr-share-card card">
+                <div class="qr-share-content">
+                    <div class="qr-text">
+                        <h3>Bu Aracın QR Kodu</h3>
+                        <p>Aşağıdaki QR kodu telefonunuzla taratarak bu araca ait bakım geçmişine anında erişebilirsiniz. Çıktı alıp torpidoya veya ön cama yapıştırabilirsiniz!</p>
+                        <div class="qr-buttons">
+                            <button class="btn btn-secondary" id="btn-print-qr">
+                                <i class="fa-solid fa-print"></i> QR Kartını Yazdır
+                            </button>
+                            <button class="btn btn-link" id="btn-download-qr">
+                                <i class="fa-solid fa-download"></i> İndir (PNG)
+                            </button>
+                        </div>
+                    </div>
+                    <div class="qr-image-wrapper">
+                        <canvas id="detail-qr-canvas"></canvas>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============================================== -->
+        <!-- SECTION 3: MASTER AUTHENTICATION -->
+        <!-- ============================================== -->
+        <section id="sec-master-auth" class="app-section">
+            <div class="back-navigation">
+                <button class="btn btn-link" id="btn-auth-back">
+                    <i class="fa-solid fa-arrow-left"></i> Ana Sayfaya Dön
+                </button>
+            </div>
+
+            <div class="auth-card card">
+                <div class="auth-header text-center">
+                    <div class="auth-avatar"><i class="fa-solid fa-key"></i></div>
+                    <h2>Usta Paneli Girişi</h2>
+                    <p>Devam etmek için ustanızı seçip şifrenizi girin.</p>
+                </div>
+
+                <form class="auth-form" id="form-master-login">
+                    <div class="form-group">
+                        <label for="select-auth-master">Usta Seçin</label>
+                        <select id="select-auth-master" class="form-control">
+                            <option value="Fatih">Fatih Usta</option>
+                            <option value="Mustafa">Mustafa Usta</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="input-auth-pin">Usta Giriş Şifresi (Varsayılan: 1234)</label>
+                        <input type="password" id="input-auth-pin" class="form-control text-center" placeholder="••••" maxlength="6" inputmode="numeric" required>
+                    </div>
+
+                    <div id="auth-error-msg" class="error-banner hidden">
+                        <i class="fa-solid fa-circle-exclamation"></i> Yanlış şifre! Tekrar deneyin.
+                    </div>
+
+                    <button type="submit" class="btn btn-primary btn-block btn-lg">
+                        <i class="fa-solid fa-arrow-right-to-bracket"></i> Giriş Yap
+                    </button>
+                </form>
+            </div>
+        </section>
+
+        <!-- ============================================== -->
+        <!-- SECTION 4: MASTER PANEL (DASHBOARD) -->
+        <!-- ============================================== -->
+        <section id="sec-master-panel" class="app-section">
+            <!-- Master Info Banner -->
+            <div class="master-banner">
+                <div class="master-profile">
+                    <div class="master-avatar"><i class="fa-solid fa-user-check"></i></div>
+                    <div>
+                        <h2 id="master-panel-title">Hoş Geldiniz, Fatih Usta</h2>
+                        <p class="master-status-badge">Oturum Açık • MBAUTOLAB Yetkilisi</p>
+                    </div>
+                </div>
+                <div class="master-actions">
+                    <button class="btn btn-accent btn-sm" id="btn-master-scanner">
+                        <i class="fa-solid fa-qrcode"></i> QR Kod Tara (Hızlı Güncelle)
+                    </button>
+                    <button class="btn btn-outline-danger btn-sm" id="btn-master-logout">
+                        <i class="fa-solid fa-power-off"></i> Çıkış Yap
+                    </button>
+                </div>
+            </div>
+
+            <!-- Master Workspace Navigation Tabs -->
+            <div class="tab-container">
+                <div class="tabs-header">
+                    <button class="tab-btn active" data-target="tab-vehicles-list">
+                        <i class="fa-solid fa-car-rear"></i> Aktif Araçlar (<span id="count-active-cars">0</span>)
+                    </button>
+                    <button class="tab-btn" data-target="tab-new-vehicle">
+                        <i class="fa-solid fa-plus"></i> Yeni Araç Kaydı
+                    </button>
+                </div>
+
+                <div class="tabs-content">
+                    
+                    <!-- TAB 1: VEHICLES LIST -->
+                    <div id="tab-vehicles-list" class="tab-pane active">
+                        <div class="search-bar-row">
+                            <div class="search-input-wrapper">
+                                <i class="fa-solid fa-magnifying-glass search-bar-icon"></i>
+                                <input type="text" id="input-master-search" class="form-control search-bar-input" placeholder="Plaka, marka, model veya müşteri adı ile ara...">
+                            </div>
+                        </div>
+
+                        <!-- Grid layout for service cars -->
+                        <div class="vehicles-grid" id="master-vehicles-list">
+                            <!-- JS will inject vehicle cards here -->
+                        </div>
+                    </div>
+
+                    <!-- TAB 2: ADD NEW VEHICLE -->
+                    <div id="tab-new-vehicle" class="tab-pane">
+                        <div class="card form-card">
+                            <h3 class="card-title"><i class="fa-solid fa-car"></i> MBAUTOLAB'a Yeni Araç Kaydet</h3>
+                            
+                            <form id="form-create-vehicle">
+                                <div class="form-row">
+                                    <div class="form-group col-6">
+                                        <label for="create-plate">Araç Plakası *</label>
+                                        <div class="license-plate-input-container mini">
+                                            <div class="plate-tr-badge">TR</div>
+                                            <input type="text" id="create-plate" class="plate-input-field" placeholder="34 MBA 99" required autocomplete="off">
+                                        </div>
+                                    </div>
+                                    <div class="form-group col-6">
+                                        <label for="create-brand">Marka / Model *</label>
+                                        <input type="text" id="create-brand" class="form-control" placeholder="BMW M5 Sedan, Audi A4, vb." required>
+                                    </div>
+                                </div>
+
+                                <div class="form-row">
+                                    <div class="form-group col-6">
+                                        <label for="create-owner">Müşteri Adı Soyadı *</label>
+                                        <input type="text" id="create-owner" class="form-control" placeholder="Cem Yılmaz" required>
+                                    </div>
+                                    <div class="form-group col-6">
+                                        <label for="create-phone">Müşteri Telefonu *</label>
+                                        <input type="tel" id="create-phone" class="form-control" placeholder="0555 123 4567" required>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="create-status">İlk Durum Aşaması</label>
+                                    <select id="create-status" class="form-control">
+                                        <option value="sirada">Sırada / Beklemede</option>
+                                        <option value="bakimda" selected>Bakımda / İşlem Yapılıyor</option>
+                                        <option value="test">Test Sürüşünde</option>
+                                        <option value="hazir">Teslim Edilmeye Hazır</option>
+                                    </select>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="create-notes">İlk Yapılan İşlem / Şikayet</label>
+                                    <textarea id="create-notes" class="form-control" rows="3" placeholder="Örn: 60.000 KM periyodik bakımı yapılacak, bujiler kontrol edilecek."></textarea>
+                                </div>
+
+                                <button type="submit" class="btn btn-primary btn-lg btn-block">
+                                    <i class="fa-solid fa-floppy-disk"></i> Aracı Kaydet ve QR Oluştur
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- ============================================== -->
+        <!-- MODAL: ADD SERVICE RECORD (FOR MASTER) -->
+        <!-- ============================================== -->
+        <div id="modal-service-update" class="modal-overlay">
+            <div class="modal-content card">
+                <div class="modal-header">
+                    <h3><i class="fa-solid fa-screwdriver-wrench"></i> Servis Kaydı Güncelle</h3>
+                    <button class="modal-close-btn" id="btn-close-modal-update">&times;</button>
+                </div>
+                
+                <form id="form-service-update">
+                    <input type="hidden" id="update-vehicle-id">
+                    
+                    <div class="vehicle-quick-summary" id="update-vehicle-summary">
+                        34 MBA 99 - BMW M5 Sedan
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group col-6">
+                            <label for="update-status">Güncel Durum Aşaması *</label>
+                            <select id="update-status" class="form-control" required>
+                                <option value="sirada">Sırada / Beklemede</option>
+                                <option value="bakimda">Bakımda / İşlem Yapılıyor</option>
+                                <option value="test">Test Sürüşünde</option>
+                                <option value="hazir">Teslim Edilmeye Hazır</option>
+                                <option value="teslim">Teslim Edildi (Arşivle)</option>
+                            </select>
+                        </div>
+                        <div class="form-group col-6">
+                            <label for="update-km">Mevcut Kilometre (KM) *</label>
+                            <input type="number" id="update-km" class="form-control" placeholder="124500" required>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="update-desc">Yapılan İşlemler (Detaylı Açıklama) *</label>
+                        <textarea id="update-desc" class="form-control" rows="3" placeholder="Yağ filtresi, hava filtresi ve motor yağı değiştirildi." required></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="update-parts">Değişen Parçalar (İsteğe Bağlı - Virgülle Ayırın)</label>
+                        <input type="text" id="update-parts" class="form-control" placeholder="Örn: Hava Filtresi, Yağ Filtresi, Bujiler">
+                    </div>
+
+                    <div class="form-group">
+                        <label>Parça Fotoğrafları (İsteğe Bağlı - Telefon Kamerasıyla Çekebilirsin)</label>
+                        <div class="photo-upload-container">
+                            <div class="photo-preview-grid" id="update-photo-preview-grid">
+                                <!-- Previews of uploaded images will be shown here -->
+                                <label class="photo-add-card" id="btn-trigger-file-input">
+                                    <i class="fa-solid fa-camera"></i>
+                                    <span>Fotoğraf Çek / Ekle</span>
+                                    <input type="file" id="input-update-photos" accept="image/*" multiple class="hidden">
+                                </label>
+                            </div>
+                        </div>
+                        <span class="help-text">Fotoğraflar sisteme yüklenirken otomatik olarak sıkıştırılır. Birden fazla fotoğraf ekleyebilirsiniz.</span>
+                    </div>
+
+                    <div class="modal-footer-btn-group">
+                        <button type="button" class="btn btn-secondary" id="btn-cancel-modal-update">İptal</button>
+                        <button type="submit" class="btn btn-primary">
+                            <i class="fa-solid fa-check"></i> Kaydı Kaydet ve Güncelle
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <!-- ============================================== -->
+        <!-- MODAL: EMBEDDED QR SCANNER VIEWPORT -->
+        <!-- ============================================== -->
+        <div id="modal-qr-scanner" class="modal-overlay">
+            <div class="modal-content card qr-scanner-modal">
+                <div class="modal-header">
+                    <h3><i class="fa-solid fa-qrcode"></i> QR Kod Kamerası</h3>
+                    <button class="modal-close-btn" id="btn-close-scanner">&times;</button>
+                </div>
+                
+                <div class="qr-scanner-viewport-wrapper">
+                    <!-- Scanner frame graphics -->
+                    <div class="qr-scanner-laser"></div>
+                    <div class="scanner-corner corner-tl"></div>
+                    <div class="scanner-corner corner-tr"></div>
+                    <div class="scanner-corner corner-bl"></div>
+                    <div class="scanner-corner corner-br"></div>
+                    
+                    <div id="qr-camera-reader"></div>
+                </div>
+
+                <div class="qr-scanner-instructions text-center">
+                    <p>Aracın üzerine yapıştırılmış QR kodunu çerçevenin içine ortalayın.</p>
+                    <div id="qr-scanner-feedback" class="feedback-text text-muted">Kamera aranıyor...</div>
+                </div>
+                
+                <div class="modal-footer-btn-group text-center">
+                    <button class="btn btn-secondary" id="btn-stop-scanner">İptal / Kapat</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- ============================================== -->
+        <!-- PRINT CARD VIEWPORT (TEMPORARILY RENDERED FOR PRINTING) -->
+        <!-- ============================================== -->
+        <div id="qr-print-card-template" class="hidden-print-source">
+            <div class="print-card-wrapper">
+                <div class="print-card-header">
+                    <!-- Text elements -->
+                    <div class="print-logo-title">MBAUTOLAB</div>
+                    <div class="print-logo-subtitle">AKILLI TAKİP SİSTEMİ</div>
+                </div>
+                <div class="print-card-qr-box">
+                    <canvas id="print-qr-canvas"></canvas>
+                </div>
+                <div class="print-card-plate" id="print-plate-badge">34 MBA 99</div>
+                <div class="print-card-footer">
+                    <p>Telefonunuzun kamerasıyla QR kodu taratarak aracınızın servis durumunu ve geçmişini canlı takip edin!</p>
+                </div>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="app-footer text-center">
+        <div class="container">
+            <p>&copy; 2026 <strong>MBAUTOLAB</strong>. Tüm Hakları Saklıdır.</p>
+            <p class="footer-subtext">Fatih Usta & Mustafa Usta tarafından sevgiyle ve titizlikle kurulmuştur.</p>
+        </div>
+    </footer>
+
+    <!-- Core App Logic -->
+    <script src="app.js"></script>
+</body>
+</html>
