@@ -348,7 +348,7 @@ export default function RandevuPage() {
                 <div className="form-group">
                   <label className="form-label">Usta Seçin *</label>
                   <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 12 }}>
-                    {['Fatih', 'Mustafa'].map(name => (
+                    {['Fatih', 'Burak'].map(name => (
                       <motion.button key={name} type="button" whileTap={{ scale: 0.97 }} onClick={() => setMaster(name)}
                         style={{
                           padding: '16px 12px', borderRadius: 'var(--r-md)',

@@ -5,7 +5,7 @@ import Navbar from "@/components/Navbar";
 export const metadata: Metadata = {
   title: "MBAUTOLAB | Akıllı Oto Servis Takip Sistemi",
   description:
-    "MBAUTOLAB profesyonel oto servis takip sistemi. Fatih ve Mustafa Usta güvencesiyle aracınızın bakım geçmişini, parça değişimlerini ve servis durumunu anlık görün.",
+    "MBAUTOLAB profesyonel oto servis takip sistemi. Fatih ve Burak Usta güvencesiyle aracınızın bakım geçmişini, parça değişimlerini ve servis durumunu anlık görün.",
   keywords: "oto servis, araç takip, bakım geçmişi, QR kod, MBAUTOLAB",
   openGraph: {
     title: "MBAUTOLAB | Akıllı Oto Servis Takip",
@@ -51,7 +51,7 @@ export default function RootLayout({
         <footer className="site-footer" style={{ position: 'relative', zIndex: 1 }}>
           <div className="footer-inner">
             <p className="footer-brand">© 2026 MBAUTOLAB — Tüm Hakları Saklıdır</p>
-            <p className="footer-sub">Fatih Usta &amp; Mustafa Usta tarafından titizlikle hizmet verilmektedir.</p>
+            <p className="footer-sub">Fatih Usta &amp; Burak Usta tarafından titizlikle hizmet verilmektedir.</p>
           </div>
         </footer>
       </body>

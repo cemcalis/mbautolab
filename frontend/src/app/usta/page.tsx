@@ -642,7 +642,7 @@ export default function UstaPanel() {
                 <div className="form-group">
                   <label className="form-label">Usta Seçin</label>
                   <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 10 }}>
-                    {['Fatih', 'Mustafa'].map(name => (
+                    {['Fatih', 'Burak'].map(name => (
                       <motion.button key={name} type="button" whileTap={{ scale: 0.97 }} onClick={() => setAuthMaster(name)}
                         style={{ padding: '14px 12px', borderRadius: 'var(--r-md)', border: authMaster === name ? '2px solid var(--blue)' : '1.5px solid var(--border-default)', background: authMaster === name ? 'rgba(0,162,232,0.08)' : 'var(--bg-elevated)', cursor: 'pointer', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 8, transition: 'all 0.2s ease' }}>
                         <div style={{ width: 40, height: 40, borderRadius: '50%', background: authMaster === name ? 'var(--blue)' : 'var(--bg-card)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: authMaster === name ? '#fff' : 'var(--text-muted)', transition: 'all 0.2s ease' }}>
@@ -851,7 +851,7 @@ export default function UstaPanel() {
                     { key: 'me', label: `Ben (${currentUser} Usta)` },
                     { key: 'all', label: 'Tüm Ustalar' },
                     { key: 'Fatih', label: 'Fatih Usta' },
-                    { key: 'Mustafa', label: 'Mustafa Usta' },
+                    { key: 'Burak', label: 'Burak Usta' },
                   ].map(m => (
                     <button key={m.key} onClick={() => setApptMasterFilter(m.key)}
                       style={{
@@ -932,7 +932,7 @@ export default function UstaPanel() {
                     { key: 'me', label: `Ben (${currentUser} Usta)` },
                     { key: 'all', label: 'Tüm Ustalar' },
                     { key: 'Fatih', label: 'Fatih Usta' },
-                    { key: 'Mustafa', label: 'Mustafa Usta' },
+                    { key: 'Burak', label: 'Burak Usta' },
                   ].map(m => (
                     <button key={m.key} onClick={() => setApptMasterFilter(m.key)}
                       style={{

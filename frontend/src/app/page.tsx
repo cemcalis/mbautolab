@@ -27,7 +27,7 @@ const item = {
 
 const STATS = [
   { icon: <Award size={20} />, number: '15+', label: 'Yıllık Sektör Deneyimi' },
-  { icon: <Users size={20} />, number: '2', label: 'Uzman Baş Usta (Fatih & Mustafa)' },
+  { icon: <Users size={20} />, number: '2', label: 'Uzman Baş Usta (Fatih & Burak)' },
   { icon: <CheckCircle size={20} />, number: '10.000+', label: 'Başarılı Servis Kaydı' },
   { icon: <Star size={20} />, number: '%99.8', label: 'Müşteri Memnuniyeti' },
 ];
@@ -82,7 +82,7 @@ const FAQS = [
   },
   {
     q: 'Randevu talebi oluşturduktan sonra süreç nasıl ilerler?',
-    a: 'Web sitemizden oluşturduğunuz randevu talebi usta panelimize anında düşer. Seçtiğiniz usta (Fatih veya Mustafa Usta) takvim uygunluğuna göre talebinizi inceler, saat veya tarihi kesinleştirip onaylar. Onay durumu ve usta notu randevu takip sayfanızda anlık olarak güncellenir.'
+    a: 'Web sitemizden oluşturduğunuz randevu talebi usta panelimize anında düşer. Seçtiğiniz usta (Fatih veya Burak Usta) takvim uygunluğuna göre talebinizi inceler, saat veya tarihi kesinleştirip onaylar. Onay durumu ve usta notu randevu takip sayfanızda anlık olarak güncellenir.'
   },
   {
     q: 'Hangi marka ve model araçlara bakıyorsunuz?',
@@ -139,7 +139,7 @@ export default function Home() {
           </h1>
 
           <p className="hero-sub" style={{ maxWidth: 640, margin: '16px auto 0', fontSize: '1.05rem', color: 'var(--text-secondary)' }}>
-            Fatih ve Mustafa Usta'nın profesyonel dokunuşlarıyla yapılan tüm bakım kayıtları, parça fotoğrafları ve kilometre verileri dijital güvence altında.
+            Fatih ve Burak Usta'nın profesyonel dokunuşlarıyla yapılan tüm bakım kayıtları, parça fotoğrafları ve kilometre verileri dijital güvence altında.
           </p>
         </motion.div>
 
@@ -255,7 +255,7 @@ export default function Home() {
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: 28 }}>
               {[
                 { num: '01', title: 'Kabul & QR Kart Ataması', desc: 'Servise girdiğinizde aracınız sisteme eklenir ve ona özel QR Kod basılarak torpido bölmesine yapıştırılır.' },
-                { num: '02', title: 'Ustadan Canlı Kayıt', desc: 'Fatih veya Mustafa Usta, bakım esnasında değişen her parçanın, yapılan her işlemin fotoğrafını çekerek QR profiline işler.' },
+                { num: '02', title: 'Ustadan Canlı Kayıt', desc: 'Fatih veya Burak Usta, bakım esnasında değişen her parçanın, yapılan her işlemin fotoğrafını çekerek QR profiline işler.' },
                 { num: '03', title: 'Sorgulama & Arşiv', desc: 'Telefonunuzun kamerasıyla QR kodu taratarak yapılan tüm işlemleri, km geçmişini ve parça fotoğraflarını anlık görün.' },
               ].map((s, i) => (
                 <div key={i} style={{ display: 'flex', flexDirection: 'column', gap: 12, position: 'relative' }}>
@@ -358,7 +358,7 @@ export default function Home() {
 
             <div style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
               {[
-                { title: 'Çift Usta Kontrolü', desc: 'Fatih ve Mustafa Usta her kritik işlemi ortaklaşa kontrol eder ve dijital imzayla onaylar.' },
+                { title: 'Çift Usta Kontrolü', desc: 'Fatih ve Burak Usta her kritik işlemi ortaklaşa kontrol eder ve dijital imzayla onaylar.' },
                 { title: 'Sözlü Değil, Fotoğraflı Güvence', desc: 'Değişen her parçanın eski ve yeni hallerini gösteren fotoğraflar veritabanımıza süresiz olarak kaydedilir.' },
                 { title: 'Plakadan Kolay Takip', desc: 'Aracınızın durumunu öğrenmek için servisi aramanıza gerek yok. Plaka sorgulayarak hangi aşamada olduğunu anında görebilirsiniz.' },
                 { title: 'TSE Standartlarında Ekipman', desc: 'Arıza tespiti ve mekanik kalibrasyonlarda en güncel teknolojik bilgisayar sistemlerini kullanıyoruz.' }
@@ -498,7 +498,7 @@ export default function Home() {
                   <i className="fa-brands fa-whatsapp" style={{ fontSize: 20 }} />
                 </div>
                 <div>
-                  <p style={{ fontSize: '0.72rem', color: 'rgba(37,211,102,0.8)', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.5px', marginBottom: 2 }}>Fatih Usta WhatsApp</p>
+                  <p style={{ fontSize: '0.72rem', color: 'rgba(37,211,102,0.8)', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.5px', marginBottom: 2 }}>Burak Usta WhatsApp</p>
                   <p style={{ fontSize: '0.92rem', fontWeight: 700, color: 'var(--text-primary)', fontFamily: 'Space Grotesk, sans-serif' }}>+90 548 858 27 02</p>
                 </div>
               </motion.a>
@@ -523,7 +523,7 @@ export default function Home() {
                   <i className="fa-brands fa-whatsapp" style={{ fontSize: 20 }} />
                 </div>
                 <div>
-                  <p style={{ fontSize: '0.72rem', color: 'rgba(37,211,102,0.8)', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.5px', marginBottom: 2 }}>Mustafa Usta WhatsApp</p>
+                  <p style={{ fontSize: '0.72rem', color: 'rgba(37,211,102,0.8)', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.5px', marginBottom: 2 }}>Fatih Usta WhatsApp</p>
                   <p style={{ fontSize: '0.92rem', fontWeight: 700, color: 'var(--text-primary)', fontFamily: 'Space Grotesk, sans-serif' }}>+90 539 108 08 70</p>
                 </div>
               </motion.a>
