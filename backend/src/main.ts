@@ -9,6 +9,8 @@ async function bootstrap() {
     origin: [
       'http://localhost:3000',
       'https://mbautolab-frontend.onrender.com',
+      'https://mbautolab.com',
+      'https://www.mbautolab.com',
     ],
     methods: ['GET', 'POST', 'PATCH', 'DELETE', 'OPTIONS'],
     credentials: true,
